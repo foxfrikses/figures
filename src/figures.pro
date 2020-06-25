@@ -17,10 +17,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    picture.cpp
 
 HEADERS += \
-    mainwindow.h
+    instrument.h \
+    mainwindow.h \
+    picture.h
 
 FORMS += \
     mainwindow.ui
