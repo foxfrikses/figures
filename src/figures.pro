@@ -18,6 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     model/ellipse.cpp \
+    model/line.cpp \
     model/rectangle.cpp \
     model/triangle.cpp \
     view/mainwindow.cpp \
@@ -28,6 +29,7 @@ HEADERS += \
     model/basedrawable.h \
     model/ellipse.h \
     model/figure.h \
+    model/line.h \
     model/rectangle.h \
     model/triangle.h \
     view/mainwindow.h \
