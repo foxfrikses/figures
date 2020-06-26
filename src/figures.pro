@@ -21,6 +21,7 @@ SOURCES += \
     model/line.cpp \
     model/rectangle.cpp \
     model/triangle.cpp \
+    model/whiteboard.cpp \
     view/mainwindow.cpp \
     view/picture.cpp
 
@@ -32,6 +33,7 @@ HEADERS += \
     model/line.h \
     model/rectangle.h \
     model/triangle.h \
+    model/whiteboard.h \
     view/mainwindow.h \
     view/picture.h \
 

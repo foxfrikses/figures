@@ -40,7 +40,6 @@ private slots:
     void on_actionMove_triggered();
 
 signals:
-    void sendMove(QPoint from, QPoint to);
     void setInstrum(Instrument);
     void loadFromFile(QString);
     void newPicture();
