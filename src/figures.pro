@@ -17,7 +17,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     main.cpp \
-    model/figure.cpp \
     view/mainwindow.cpp \
     view/picture.cpp
 
