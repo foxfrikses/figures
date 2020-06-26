@@ -17,9 +17,9 @@ private:
     void mouseDoubleClickEvent(QMouseEvent *event) override;
 
 signals:
-    void mousePressed(QPoint);
-    void mouseReleased(QPoint);
-    void mouseMoved(QPoint);
+    void mousePressed(QMouseEvent*);
+    void mouseReleased(QMouseEvent*);
+    void mouseMoved(QMouseEvent*);
 };
 
 #endif // PICTURE_H
