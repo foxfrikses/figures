@@ -9,7 +9,7 @@ class Figure : public BaseDrawable
 public:
     Figure();
     const QPoint& getCenter(){return center;}
-private:
+protected:
     QPoint center;
 };
 
