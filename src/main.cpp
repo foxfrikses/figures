@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+#include "view/mainwindow.h"
 
 #include <QtCore/qglobal.h>
 #if QT_VERSION >= 0x050000

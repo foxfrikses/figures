@@ -11,7 +11,7 @@ public:
     BaseDrawable(){}
     virtual void draw(QPaintDevice*) = 0;
     virtual bool includesPoint(QPoint){return false;}
-    virtual ~BaseDrawable() = 0;
+    virtual ~BaseDrawable(){}
 };
 
 #endif // BASEDRAWABLE_H

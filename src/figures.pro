@@ -17,13 +17,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     main.cpp \
+    model/ellipse.cpp \
+    model/rectangle.cpp \
+    model/triangle.cpp \
     view/mainwindow.cpp \
     view/picture.cpp
 
 HEADERS += \
     instrument.h \
     model/basedrawable.h \
+    model/ellipse.h \
     model/figure.h \
+    model/rectangle.h \
+    model/triangle.h \
     view/mainwindow.h \
     view/picture.h \
 

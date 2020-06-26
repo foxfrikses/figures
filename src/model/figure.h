@@ -7,10 +7,8 @@
 class Figure : public BaseDrawable
 {
 public:
-    Figure();
-    const QPoint& getCenter(){return center;}
-protected:
-    QPoint center;
+    Figure(){}
+    virtual QPoint getCenter() = 0;
 };
 
 #endif // FIGURE_H
