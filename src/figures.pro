@@ -22,6 +22,7 @@ SOURCES += \
 
 HEADERS += \
     instrument.h \
+    model/basedrawable.h \
     view/mainwindow.h \
     view/picture.h \
 
