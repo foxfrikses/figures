@@ -25,3 +25,9 @@ bool Triangle::includesPoint(QPoint p) const
     return (p.y() - a.y())*(a.x() - b.x()) - (p.x() - a.x()) * (a.y() - b.y()) <= 0 &&
            (p.y() - a.y())*(a.x() - c.x()) - (p.x() - a.x()) * (a.y() - c.y()) >= 0;
 }
+
+void Triangle::move(QPoint d){
+    a = {a.x() + d.x(), a.y() + d.y()};
+    b = {b.x() + d.x(), b.y() + d.y()};
+    c = {c.x() + d.x(), c.y() + d.y()};
+}

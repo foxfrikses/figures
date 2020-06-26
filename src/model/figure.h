@@ -9,6 +9,7 @@ class Figure : public BaseDrawable
 public:
     Figure(){}
     virtual QPoint getCenter() const = 0;
+    virtual void move(QPoint) = 0;
 };
 
 #endif // FIGURE_H

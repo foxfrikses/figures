@@ -12,6 +12,7 @@ public:
     QPoint getCenter() const override;
     void draw(QPaintDevice*) const override;
     bool includesPoint(QPoint) const override;
+    void move(QPoint) override;
 
 protected:
     QRect rect;

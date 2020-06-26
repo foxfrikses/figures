@@ -21,3 +21,10 @@ bool Rectangle::includesPoint(QPoint p) const
     return p.x() <= rect.right()  && p.x() >= rect.left() &&
            p.y() <= rect.bottom() && p.y() >= rect.top();
 }
+
+void Rectangle::move(QPoint d){
+    rect.setCoords(rect.left()   + d.x(),
+                   rect.top()    + d.y(),
+                   rect.right()  + d.x(),
+                   rect.bottom() + d.y());
+}
