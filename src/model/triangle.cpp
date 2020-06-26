@@ -7,12 +7,12 @@ Triangle::Triangle(QRect rect)
     c = {rect.left(), rect.bottom()};
 }
 
-QPoint Triangle::getCenter()
+QPoint Triangle::getCenter() const
 {
     return QPoint(a.x(), a.y() + (b.y() - a.y())/2);
 }
 
-void Triangle::draw(QPaintDevice *paintDevice)
+void Triangle::draw(QPaintDevice *paintDevice) const
 {
     QPainter painter(paintDevice);
     painter.drawLine(a,b);
@@ -20,7 +20,7 @@ void Triangle::draw(QPaintDevice *paintDevice)
     painter.drawLine(c,a);
 }
 
-bool Triangle::includesPoint(QPoint p)
+bool Triangle::includesPoint(QPoint p) const
 {
     return (p.y() - a.y())*(a.x() - b.x()) - (p.x() - a.x()) * (a.y() - b.y()) <= 0 &&
            (p.y() - a.y())*(a.x() - c.x()) - (p.x() - a.x()) * (a.y() - c.y()) >= 0;

@@ -8,7 +8,7 @@ class Figure : public BaseDrawable
 {
 public:
     Figure(){}
-    virtual QPoint getCenter() = 0;
+    virtual QPoint getCenter() const = 0;
 };
 
 #endif // FIGURE_H

@@ -9,8 +9,8 @@ class BaseDrawable
 {
 public:
     BaseDrawable(){}
-    virtual void draw(QPaintDevice*) = 0;
-    virtual bool includesPoint(QPoint){return false;}
+    virtual void draw(QPaintDevice*) const = 0;
+    virtual bool includesPoint(QPoint) const {return false;}
     virtual ~BaseDrawable(){}
 };
 

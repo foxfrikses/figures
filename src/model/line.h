@@ -13,7 +13,7 @@ class Line : public BaseDrawable
 {
 public:
     Line(iterator, iterator);
-    void draw(QPaintDevice*) override;
+    void draw(QPaintDevice*) const override;
     iterator getFrom() const {return from;}
     iterator getTo() const {return to;}
 protected:

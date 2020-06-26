@@ -6,7 +6,7 @@ Line::Line(iterator from, iterator to)
     this->to = to;
 }
 
-void Line::draw(QPaintDevice *paintDevice)
+void Line::draw(QPaintDevice *paintDevice) const
 {
     QPainter painter(paintDevice);
     painter.drawLine((*from)->getCenter(), (*to)->getCenter());

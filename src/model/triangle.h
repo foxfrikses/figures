@@ -9,9 +9,9 @@ class Triangle : public Figure
 public:
     Triangle(QRect);
 
-    QPoint getCenter() override;
-    void draw(QPaintDevice*) override;
-    bool includesPoint(QPoint) override;
+    QPoint getCenter() const override;
+    void draw(QPaintDevice*) const override;
+    bool includesPoint(QPoint) const override;
 
 protected:
     QPoint a, b, c;
