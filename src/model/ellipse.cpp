@@ -23,7 +23,7 @@ bool Ellipse::includesPoint(QPoint p) const
 {
     QPoint center = getCenter();
     return qPow(((p.x() - center.x()) / (qreal)rect.width()), 2) +
-           qPow(((p.y() - center.y()) / (qreal)rect.height()), 2) <= 1;
+           qPow(((p.y() - center.y()) / (qreal)rect.height()), 2) <= 0.25;
 }
 
 void Ellipse::move(QPoint d)
