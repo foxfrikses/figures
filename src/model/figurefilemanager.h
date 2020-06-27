@@ -3,9 +3,11 @@
 
 #include <QtCore/qglobal.h>
 #include <QPixmap>
+#include <QFile>
 \
 #include "figure.h"
 #include "line.h"
+
 
 class FigureFileManager
 {
