@@ -6,7 +6,12 @@
 #include <QFile>
 \
 #include "figure.h"
+#include "rectangle.h"
+#include "ellipse.h"
+#include "triangle.h"
 #include "line.h"
+#include "line.h"
+
 
 
 class FigureFileManager

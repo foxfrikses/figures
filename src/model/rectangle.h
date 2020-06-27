@@ -20,7 +20,6 @@ public:
     int top()    const { return rect.top(); }
     int bottom() const { return rect.bottom(); }
 
-
     void setRect(QRect);
 
 protected:

@@ -156,9 +156,10 @@ void Whiteboard::setInstrument(Instrument instr)
 
 void Whiteboard::load(QString path)
 {
-    finishAction(curPoint);
+    newBoard();
     FigureFileManager manager;
     manager.loadFromFIG(path, figures, lines);
+    draw();
 }
 
 void Whiteboard::newBoard()
