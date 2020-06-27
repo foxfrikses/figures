@@ -13,8 +13,10 @@ QPoint Ellipse::getCenter() const
 
 void Ellipse::draw(QPaintDevice *paintDevice) const
 {
-    QPainter painter(paintDevice);
-    painter.drawEllipse(rect);
+    if (isDrawable()) {
+        QPainter painter(paintDevice);
+        painter.drawEllipse(rect);
+    }
 }
 
 bool Ellipse::includesPoint(QPoint p) const
@@ -24,9 +26,25 @@ bool Ellipse::includesPoint(QPoint p) const
            qPow(((p.y() - center.y()) / (qreal)rect.height()), 2) <= 1;
 }
 
-void Ellipse::move(QPoint d){
+void Ellipse::move(QPoint d)
+{
     rect.setCoords(rect.left()   + d.x(),
                    rect.top()    + d.y(),
                    rect.right()  + d.x(),
                    rect.bottom() + d.y());
+}
+
+bool Ellipse::isDrawable() const
+{
+    if (rect.top() == rect.bottom() ||
+        rect.left() == rect.right() ||
+        rect.bottom() < 0 ||
+        rect.right() < 0)
+        return false;
+    else return true;
+}
+
+void Ellipse::setRect(QRect rect)
+{
+    this->rect.setCoords(rect.left(), rect.top(), rect.right(), rect.bottom());
 }

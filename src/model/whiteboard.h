@@ -23,24 +23,30 @@ protected:
     QLinkedList<Figure*> figures;
     QLinkedList<Line> lines;
     QPoint curPoint;
-    bool curPointSet{false};
+    QPoint startPoint;
+    bool pointSet{false};
     Instrument instr = Instrument::None;
     QPixmap pixmap;
+    QColor pixmapColor;
+    Figure* curFigure{nullptr};
 
 signals:
     void sendPixmap(const QPixmap&);
 
 public slots:
-    void startPoint(QPoint);
-    void tempPoint(QPoint);
-    void finishPoint(QPoint);
+    void startAction(QPoint);
+    void tempAction(QPoint);
+    void finishAction(QPoint);
 public slots:
     void setInstrument(Instrument);
     void load(QString);
     void newBoard();
     void newBoard(QSize);
+    void newBoard(QSize, QColor);
     void saveAsPNG(QString);
     void saveAsFIG(QString);
+private:
+    void stopAction();
 };
 
 #endif // WHITEBOARD_H

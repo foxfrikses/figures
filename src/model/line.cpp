@@ -1,4 +1,5 @@
 #include "line.h"
+#include <QPoint>
 
 Line::Line(iterator from, iterator to)
 {
@@ -8,6 +9,8 @@ Line::Line(iterator from, iterator to)
 
 void Line::draw(QPaintDevice *paintDevice) const
 {
+    auto f = (*from)->getCenter();
+    auto t = (*to)->getCenter();
     QPainter painter(paintDevice);
-    painter.drawLine((*from)->getCenter(), (*to)->getCenter());
+    painter.drawLine(f, t);
 }
