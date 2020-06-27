@@ -1,6 +1,6 @@
 #include "whiteboard.h"
 
-Whiteboard::Whiteboard(QSize size, QObject *parent, QColor color) :
+Whiteboard::Whiteboard(QSize size, QColor color, QObject *parent) :
     QObject(parent),
     pixmap{QPixmap(size)},
     pixmapColor{color}
@@ -113,6 +113,7 @@ void Whiteboard::newBoard(QSize size, QColor color)
     pixmapColor = color;
     pixmap = QPixmap(size);
     pixmap.fill(pixmapColor);
+    emit sendPixmap(pixmap);
 }
 
 void Whiteboard::saveAsPNG(QString path)

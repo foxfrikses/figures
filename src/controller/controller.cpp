@@ -3,7 +3,7 @@
 Controller::Controller(QObject *parent) : QObject(parent)
 {
     w = new MainWindow();
-    b = new Whiteboard(w->getPictureSize());
+    b = new Whiteboard(w->getPictureSize(), Qt::white);
 
     connect(w, SIGNAL(setInstrum(Instrument)),
             b, SLOT(setInstrument(Instrument)));
@@ -25,6 +25,8 @@ Controller::Controller(QObject *parent) : QObject(parent)
 
     connect(b, SIGNAL(sendPixmap(const QPixmap&)),
             w, SLOT(setPixmap(const QPixmap&)));
+
+    b->newBoard();
 }
 
 Controller::~Controller()

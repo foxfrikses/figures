@@ -16,7 +16,7 @@ class Whiteboard : public QObject
 {
     Q_OBJECT
 public:
-    explicit Whiteboard(QSize size, QObject *parent = nullptr, QColor color = Qt::white);
+    explicit Whiteboard(QSize size, QColor color = Qt::white, QObject *parent = nullptr);
     virtual ~Whiteboard();
 
 protected:

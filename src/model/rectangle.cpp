@@ -2,7 +2,7 @@
 
 Rectangle::Rectangle(QRect rect)
 {
-    this->rect = rect;
+    setRect(rect);
 }
 
 QPoint Rectangle::getCenter() const
@@ -33,7 +33,14 @@ void Rectangle::move(QPoint d){
 
 void Rectangle::setRect(QRect rect)
 {
-    this->rect.setCoords(rect.left(), rect.top(), rect.right(), rect.bottom());
+    int lef = rect.left();
+    int rig = rect.right();
+    int top = rect.top();
+    int bot = rect.bottom();
+    if (lef > rig) qSwap(lef, rig);
+    if (top > bot) qSwap(top, bot);
+
+    this->rect.setCoords(lef, top, rig, bot);
 }
 
 bool Rectangle::isDrawable() const {
