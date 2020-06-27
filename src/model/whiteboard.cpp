@@ -16,78 +16,141 @@ Whiteboard::~Whiteboard()
 
 void Whiteboard::startAction(QPoint p)
 {
-    if (pointSet) {
+    if (actionStarted){
         finishAction(p);
-    } else {
-        if (instr != Instrument::None){
-            if (instr == Instrument::Hand){
-                for (auto f = figures.rbegin(); f != figures.rend(); ++f)
-                    if ((*f)->includesPoint(p)){
-                        curFigure = (*f);
-                        pointSet = true;
-                        curPoint = p;
-                        break;
-                    }
-            } else if (instr == Instrument::Line) {
-
-            } else {
-                switch (instr) {
-                case Instrument::Ellipse:
-                    curFigure = new Ellipse(QRect(p, p));   break;
-                case Instrument::Triangle:
-                    curFigure = new Triangle(QRect(p, p));  break;
-                case Instrument::Rectangle:
-                    curFigure = new Rectangle(QRect(p, p)); break;
-                case Instrument::Hand:
-                case Instrument::Line:
-                case Instrument::None:
-                    return;
-                }
-                figures.append(curFigure);
-                curPoint = p;
-                pointSet = true;
-            }
-        }
-
-        draw();
+        return;
     }
+
+    switch (instr) {
+    case Instrument::None:
+        return;
+    case Instrument::Ellipse:
+        figures.append(new Ellipse(QRect(p, p)));
+        figureAdded = true;
+        actionStarted = true;
+        break;
+    case Instrument::Triangle:
+        figures.append(new Triangle(QRect(p, p)));
+        figureAdded = true;
+        actionStarted = true;
+        break;
+    case Instrument::Rectangle:
+        figures.append(new Rectangle(QRect(p, p)));
+        figureAdded = true;
+        actionStarted = true;
+        break;
+    case Instrument::Hand:
+        for (auto f = figures.rbegin(); f != figures.rend(); ++f)
+            if ((*f)->includesPoint(p)){
+                movingFigure = (*f);
+                actionStarted = true;
+                break;
+            }
+        break;
+    case Instrument::Line:
+        for (auto f = figures.rbegin(); f != figures.rend(); ++f)
+            if ((*f)->includesPoint(p)){
+                actionStarted = true;
+                break;
+            }
+        break;
+    }
+
+    fstPoint = curPoint = p;
+    draw();
 }
 
 void Whiteboard::tempAction(QPoint p)
 {
-    if (instr != Instrument::None && pointSet){
-        switch (instr) {
-        case Instrument::Ellipse:
-            ((Ellipse*)curFigure)->setRect({curPoint, p});
-            break;
-        case Instrument::Triangle:
-            ((Triangle*)curFigure)->setRect({curPoint, p});
-            break;
-        case Instrument::Rectangle:
-            ((Rectangle*)curFigure)->setRect({curPoint, p});
-            break;
-        case Instrument::Hand:
-            curFigure->move(p - curPoint);
-            curPoint = p;
-            break;
-        case Instrument::Line:
-        case Instrument::None:
-            break;
-        }
+    if (!actionStarted)
+        return;
+
+    switch (instr) {
+    case Instrument::None:
+        return;
+    case Instrument::Line:
+        break;
+    case Instrument::Ellipse:
+        if (!figures.empty())
+            ((Ellipse*)figures.back())->setRect({fstPoint, p});
+        break;
+    case Instrument::Triangle:
+        if (!figures.empty())
+            ((Triangle*)figures.back())->setRect({fstPoint, p});
+        break;
+    case Instrument::Rectangle:
+        if (!figures.empty())
+            ((Rectangle*)figures.back())->setRect({fstPoint, p});
+        break;
+    case Instrument::Hand:
+        if (!figures.empty())
+            movingFigure->move(p - curPoint);
+        break;
     }
 
+    curPoint = p;
     draw();
 }
 
 void Whiteboard::finishAction(QPoint p)
 {
-    tempAction(p);
-    stopAction();
+    if (!actionStarted)
+        return;
+
+    switch (instr) {
+    case Instrument::None:
+        return;
+    case Instrument::Ellipse:
+    case Instrument::Triangle:
+    case Instrument::Rectangle:
+        if ( figureAdded && !figures.back()->isDrawable() ){
+            delete figures.back();
+            figures.pop_back();
+        }
+        break;
+    case Instrument::Hand:
+        if (movingFigure)
+            movingFigure->move(p - curPoint);
+        break;
+    case Instrument::Line:
+        auto riter_1 = figures.rbegin();
+        auto riter_2 = figures.rbegin();
+
+        while (riter_1 != figures.rend()) {
+            if ((*riter_1)->includesPoint(fstPoint))
+                break;
+            ++riter_1;
+        }
+        if (riter_1 == figures.rend()) break;
+
+        while (riter_2 != figures.rend()) {
+            if ((*riter_2)->includesPoint(p))
+                break;
+            ++riter_2;
+        }
+        if (riter_2 == figures.rend()) break;
+
+
+        auto iter_1 = figures.begin();
+        auto iter_2 = figures.begin();
+
+        while (*iter_1 != *riter_1)
+            ++iter_1;
+        while (*iter_2 != *riter_2)
+            ++iter_2;
+        lines.append(Line(iter_1, iter_2));
+        break;
+    }
+
+    actionStarted = false;
+    figureAdded = false;
+
+    draw();
 }
 
 void Whiteboard::setInstrument(Instrument instr)
 {
-    stopAction();
+    finishAction(curPoint);
     this->instr = instr;
 }
 
@@ -109,7 +172,7 @@ void Whiteboard::newBoard(QSize size)
 void Whiteboard::newBoard(QSize size, QColor color)
 {
     clear();
-    stopAction();
+    finishAction(curPoint);
     pixmapColor = color;
     pixmap = QPixmap(size);
     pixmap.fill(pixmapColor);
@@ -126,26 +189,6 @@ void Whiteboard::saveAsFIG(QString path)
 
 }
 
-void Whiteboard::stopAction()
-{
-    switch (instr) {
-    case Instrument::Ellipse:
-    case Instrument::Triangle:
-    case Instrument::Rectangle:
-        if (curFigure)
-            if (!curFigure->isDrawable()){
-                figures.pop_back();
-                delete curFigure;
-            }
-    case Instrument::Hand:
-    case Instrument::Line:
-    case Instrument::None:
-        break;
-    }
-    pointSet = false;
-    curFigure = nullptr;
-}
-
 void Whiteboard::clear()
 {
     pixmap.fill(pixmapColor);
@@ -158,9 +201,17 @@ void Whiteboard::clear()
 void Whiteboard::draw()
 {
     pixmap.fill(pixmapColor);
+
     for (auto line : lines)
         line.draw(&pixmap);
+
+    if (instr == Instrument::Line && actionStarted){
+        QPainter painter(&pixmap);
+        painter.drawLine(fstPoint, curPoint);
+    }
+
     for (auto figure : figures)
         figure->draw(&pixmap);
+
     emit sendPixmap(pixmap);
 }

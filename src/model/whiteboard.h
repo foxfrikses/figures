@@ -22,12 +22,14 @@ public:
 protected:
     QLinkedList<Figure*> figures;
     QLinkedList<Line> lines;
+    QPoint fstPoint;
     QPoint curPoint;
-    bool pointSet{false};
+    bool actionStarted{false};
+    bool figureAdded{false};
     Instrument instr = Instrument::None;
     QPixmap pixmap;
     QColor pixmapColor;
-    Figure* curFigure{nullptr};
+    Figure* movingFigure;
 
 signals:
     void sendPixmap(const QPixmap&);
@@ -45,7 +47,6 @@ public slots:
     void saveAsPNG(QString);
     void saveAsFIG(QString);
 private:
-    void stopAction();
     void clear();
     void draw();
 };
