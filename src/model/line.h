@@ -16,6 +16,8 @@ public:
     void draw(QPaintDevice*) const override;
     iterator getFrom() const {return from;}
     iterator getTo() const {return to;}
+    QChar ch() const override {return 'e';}
+
 protected:
     iterator from, to;
 };

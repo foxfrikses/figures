@@ -14,6 +14,11 @@ public:
     bool includesPoint(QPoint) const override;
     void move(QPoint) override;
     bool isDrawable() const override;
+    QChar ch() const override {return 't';}
+    int left()   const { return c.x(); }
+    int right()  const { return b.x(); }
+    int top()    const { return a.y(); }
+    int bottom() const { return b.y(); }
 
     void setRect(QRect);
 

@@ -12,7 +12,8 @@ public:
     virtual bool isDrawable() const {return true;}
     virtual void draw(QPaintDevice*) const = 0;
     virtual bool includesPoint(QPoint) const {return false;}
-    virtual ~BaseDrawable(){}
+    virtual QChar ch() const = 0;
+    virtual ~BaseDrawable(){}    
 };
 
 #endif // BASEDRAWABLE_H
