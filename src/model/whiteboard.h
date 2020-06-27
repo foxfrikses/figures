@@ -23,7 +23,6 @@ protected:
     QLinkedList<Figure*> figures;
     QLinkedList<Line> lines;
     QPoint curPoint;
-    QPoint startPoint;
     bool pointSet{false};
     Instrument instr = Instrument::None;
     QPixmap pixmap;
@@ -47,6 +46,8 @@ public slots:
     void saveAsFIG(QString);
 private:
     void stopAction();
+    void clear();
+    void draw();
 };
 
 #endif // WHITEBOARD_H

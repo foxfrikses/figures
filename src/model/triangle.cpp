@@ -2,19 +2,12 @@
 
 Triangle::Triangle(QRect rect)
 {
-    int l = qMin(rect.left(), rect.right());
-    int r = qMax(rect.left(), rect.right());
-    int t = qMin(rect.top(),  rect.bottom());
-    int b = qMax(rect.top(),  rect.bottom());
-
-    this->a = {l + rect.width()/2, t};
-    this->b = {r, b};
-    this->c = {l, b};
+    setRect(rect);
 }
 
 QPoint Triangle::getCenter() const
 {
-    return QPoint(a.x(), a.y() + (b.y() - a.y())/2);
+    return QPoint(a.x(), (a.y() + b.y() * 2) / 3 );
 }
 
 void Triangle::draw(QPaintDevice *paintDevice) const
@@ -34,21 +27,23 @@ bool Triangle::includesPoint(QPoint p) const
 }
 
 void Triangle::move(QPoint d){
-    a = {a.x() + d.x(), a.y() + d.y()};
-    b = {b.x() + d.x(), b.y() + d.y()};
-    c = {c.x() + d.x(), c.y() + d.y()};
+    a = QPoint{a.x() + d.x(), a.y() + d.y()};
+    b = QPoint{b.x() + d.x(), b.y() + d.y()};
+    c = QPoint{c.x() + d.x(), c.y() + d.y()};
 }
 
 void Triangle::setRect(QRect rect)
 {
-    int l = qMin(rect.left(), rect.right());
-    int r = qMax(rect.left(), rect.right());
-    int t = qMin(rect.top(),  rect.bottom());
-    int b = qMax(rect.top(),  rect.bottom());
+    int lef = rect.left();
+    int rig = rect.right();
+    int top = rect.top();
+    int bot = rect.bottom();
+    if (lef > rig) qSwap(lef, rig);
+    if (top > bot) qSwap(top, bot);
 
-    this->a = {l + rect.width()/2, t};
-    this->b = {r, b};
-    this->c = {l, b};
+    this->a = {(lef + rig) / 2, top};
+    this->b = {rig, bot};
+    this->c = {lef, bot};
 }
 
 bool Triangle::isDrawable() const {
