@@ -16,6 +16,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    controller/controller.cpp \
     main.cpp \
     model/ellipse.cpp \
     model/line.cpp \
@@ -26,6 +27,7 @@ SOURCES += \
     view/picture.cpp
 
 HEADERS += \
+    controller/controller.h \
     instrument.h \
     model/basedrawable.h \
     model/ellipse.h \

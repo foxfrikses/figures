@@ -22,6 +22,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    QSize getPictureSize() {return picture->size();}
 
 private slots:
     void picturePressed(QMouseEvent*);
