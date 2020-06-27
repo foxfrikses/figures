@@ -19,6 +19,7 @@ SOURCES += \
     controller/controller.cpp \
     main.cpp \
     model/ellipse.cpp \
+    model/figurefilemanager.cpp \
     model/line.cpp \
     model/rectangle.cpp \
     model/triangle.cpp \
@@ -32,6 +33,7 @@ HEADERS += \
     model/basedrawable.h \
     model/ellipse.h \
     model/figure.h \
+    model/figurefilemanager.h \
     model/line.h \
     model/rectangle.h \
     model/triangle.h \

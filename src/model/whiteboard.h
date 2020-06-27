@@ -11,6 +11,7 @@
 #include "rectangle.h"
 #include "ellipse.h"
 #include "triangle.h"
+#include "figurefilemanager.h"
 
 class Whiteboard : public QObject
 {

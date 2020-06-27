@@ -156,7 +156,9 @@ void Whiteboard::setInstrument(Instrument instr)
 
 void Whiteboard::load(QString path)
 {
-
+    finishAction(curPoint);
+    FigureFileManager manager;
+    manager.loadFromFIG(path, figures, lines);
 }
 
 void Whiteboard::newBoard()
@@ -181,12 +183,16 @@ void Whiteboard::newBoard(QSize size, QColor color)
 
 void Whiteboard::saveAsPNG(QString path)
 {
-
+    finishAction(curPoint);
+    FigureFileManager manager;
+    manager.saveAsPNG(path, pixmap);
 }
 
 void Whiteboard::saveAsFIG(QString path)
 {
-
+    finishAction(curPoint);
+    FigureFileManager manager;
+    manager.saveAsFIG(path, figures, lines);
 }
 
 void Whiteboard::clear()
