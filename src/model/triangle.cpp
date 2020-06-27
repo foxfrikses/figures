@@ -23,7 +23,8 @@ void Triangle::draw(QPaintDevice *paintDevice) const
 bool Triangle::includesPoint(QPoint p) const
 {
     return (p.y() - a.y())*(a.x() - b.x()) - (p.x() - a.x()) * (a.y() - b.y()) <= 0 &&
-           (p.y() - a.y())*(a.x() - c.x()) - (p.x() - a.x()) * (a.y() - c.y()) >= 0;
+           (p.y() - a.y())*(a.x() - c.x()) - (p.x() - a.x()) * (a.y() - c.y()) >= 0 &&
+           p.y() <= b.y();
 }
 
 void Triangle::move(QPoint d){
