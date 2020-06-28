@@ -130,6 +130,7 @@ void Whiteboard::finishAction(QPoint p)
         }
         if (riter_2 == figures.rend()) break;
 
+        if (riter_1 == riter_2) break;
 
         auto iter_1 = figures.begin();
         auto iter_2 = figures.begin();
@@ -138,6 +139,17 @@ void Whiteboard::finishAction(QPoint p)
             ++iter_1;
         while (*iter_2 != *riter_2)
             ++iter_2;
+
+        bool is_inside{false};
+        for (auto line : lines)
+            if ((line.getTo() == iter_1 && line.getFrom() == iter_2) ||
+                 (line.getTo() == iter_2 && line.getFrom() == iter_1)){
+                is_inside = true;
+                break;
+            }
+
+        if (is_inside) break;
+
         lines.append(Line(iter_1, iter_2));
         break;
     }

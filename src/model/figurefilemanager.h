@@ -10,9 +10,6 @@
 #include "ellipse.h"
 #include "triangle.h"
 #include "line.h"
-#include "line.h"
-
-
 
 class FigureFileManager
 {
